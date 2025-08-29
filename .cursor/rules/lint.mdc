@@ -1,0 +1,177 @@
+---
+description: "Main cursor rules for the visit Go linter project"
+globs: *.go
+alwaysApply: false
+---
+# Comprehensive Code Quality Policy for visit
+
+## CRITICAL: Zero-Tolerance Quality Policy
+
+**Context**: The visit project maintains high code quality standards as a professional reactive-native application. Clean, well-tested code is essential for maintainability and reliability.
+
+**MANDATORY REQUIREMENT**: All code changes MUST pass linting, testing, and building with zero errors before being considered complete. This is non-negotiable because:
+
+- Consistent code quality ensures maintainability
+- Broken builds or failing tests block development workflow
+- Technical debt compounds quickly and becomes unmaintainable
+
+## Core Quality Requirements
+
+This project uses three essential quality gates:
+
+- **`make lint`** - Runs custom visit linter via `./vetsoft-go-style-golangci run -c .golangci.yml` (depends on `vet` target)
+- **`make test`** - Runs all tests with `go test -v ./...`
+- **`make build`** - Builds the binary to `bin/visit` to verify compilation
+
+**Your responsibilities as an AI agent**:
+
+1. **ALWAYS run the quality trinity after any code changes** - No exceptions
+2. **Address ALL errors immediately** - Do not proceed until clean
+3. **Understand each error before fixing** - Don't make blind changes
+4. **Verify fixes don't introduce new issues** - Re-run checks after each fix
+5. **Maintain consistent patterns** - Follow established project conventions
+
+## Step-by-Step Quality Workflow
+
+### Before Making Any Code Changes
+
+```bash
+# Establish baseline - this should be clean
+npm run lint && npm run test && npm run check-types
+```
+
+### After Every Code Modification
+
+```bash
+# 1. Run the linter to identify style/quality issues
+npm run lint
+
+# 2. Run tests to ensure functionality is preserved
+npm run test
+
+# 3. Verify the code compiles successfully
+npm run check-types
+
+# 4. If any step fails, address issues systematically
+# 5. Re-run all three commands until clean
+npm run lint  && npm run test && npm run check-types
+```
+
+### Systematic Error Resolution Process
+
+**Step 1: Categorize Errors**
+
+- **visit violations**: Our custom linter rules (highest priority)
+- **Staticcheck issues**: Logic and efficiency problems
+- **Unused code**: Variables, imports, functions that aren't referenced
+- **Style violations**: Standard rules
+- **Test failures**: Broken functionality or test logic
+- **Build failures**: Compilation errors or missing dependencies
+
+**Step 2: Address Each Category**
+
+1. **Fix build errors first** - Nothing else matters if code doesn't compile
+2. **Fix visit errors** - These represent our core style guidelines
+3. **Resolve test failures** - Ensure functionality works correctly
+4. **Resolve staticcheck issues** - These often indicate real functionality problems
+5. **Remove unused code** - Keep codebase clean and maintainable
+6. **Apply standard style fixes** - For consistency
+
+**Step 3: Verification Pattern**
+After each fix:
+
+```bash
+# Run the specific command that was failing
+npm run lint    # or make test, or make build
+
+# If fixed, run all three to ensure no regressions
+npm run lint && npm run test && npm run check-types
+```
+
+## Error Analysis and Resolution
+
+### When Quality Checks Fail
+
+**DO NOT:**
+
+- Ignore any errors, even seemingly minor ones
+- Make bulk changes without understanding each error
+- Assume fixes are correct without verification
+- Proceed while any quality check is failing
+
+**DO:**
+
+1. **Read each error message carefully** - Understand what rule/test/build step is failing
+2. **Identify the specific code pattern** causing the violation
+3. **Apply the correct fix** based on Go best practices and project conventions
+4. **Verify the fix resolves the issue** by running the appropriate make command
+5. **Ensure no new issues were introduced** by running all three quality checks
+
+### Common Error Patterns and Solutions
+
+**Build failures (`npm run check-types`)**:
+- Missing imports or dependencies
+- Syntax errors or type mismatches
+- Missing main function or incorrect package structure
+
+**Test failures (`npm run test`)**:
+- Broken test logic or assertions
+- Changes that broke existing functionality
+- Missing test setup or teardown
+
+**Linting failures (`npm run lint`)**:
+- visit violations - follow Google React Native Style Guide
+- Staticcheck issues - often indicate real logic problems
+- Unused variables/imports - remove completely rather than commenting out
+- Style violations - maintain consistency with existing codebase
+
+## Integration with Development Workflow
+
+### Pre-Commit Requirements
+
+<success_criteria>
+✅ `npm run lint` exits with code 0 (zero errors)
+✅ `npm run test` passes all tests
+✅ `npm runn dev:android` completes successfully
+</success_criteria>
+
+### During Code Review
+
+- **Verify quality status**: Reviewer must confirm all three commands pass
+- **Check fix quality**: Ensure violations were addressed correctly, not just suppressed
+- **Validate functionality**: Confirm tests still pass and build succeeds
+
+### When Providing Code Suggestions
+
+As an AI agent, you MUST:
+
+1. **Include quality verification** in all code recommendations
+2. **Provide examples that pass all checks** - never suggest code that would fail
+3. **Explain the reasoning** behind choices when they might seem arbitrary
+4. **Test suggested changes** by running the quality trinity before presenting them
+
+## Commands Reference
+
+```bash
+npm run lint      # Run visit linter (depends on vet target)
+npm run test      # Run all tests with verbose output
+npm run check-types     # Build the visit binary
+```
+
+## Failure Recovery
+
+### If You Cannot Resolve Quality Issues
+
+1. **Document the specific error** you're struggling with
+2. **Explain what you've tried** and why it didn't work
+3. **DO NOT proceed** with other work until all quality checks pass
+
+### Emergency Exception Process
+
+If truly critical work is blocked by quality issues:
+
+1. **Document the specific issues** that need to be addressed later
+2. **Create a plan** for resolving the quality problems
+3. **Address quality issues** as the next highest priority task
+
+**Remember**: The three-command quality trinity (`npm run lint && npm run test && npm run check-types`) is your safety net. Clean, tested, buildable code is not optional - it's the foundation of professional software development.

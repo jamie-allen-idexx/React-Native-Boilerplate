@@ -21,7 +21,6 @@
     "e2e:android:build": "detox build --configuration android.release",
     "e2e:android:test": "detox test --configuration android.release",
     "e2e:android": "run-s e2e:android:*",
-    "prepare": "husky install"
   },
   "dependencies": {
     "expo": "^49.0.5",
@@ -66,7 +65,6 @@
     "eslint-plugin-tailwindcss": "^3.13.0",
     "eslint-plugin-testing-library": "^5.11.0",
     "eslint-plugin-unused-imports": "^3.0.0",
-    "husky": "^8.0.3",
     "jest": "^29.6.2",
     "jest-expo": "^49.0.0",
     "lint-staged": "^13.2.3",

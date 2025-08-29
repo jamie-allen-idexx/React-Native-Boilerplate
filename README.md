@@ -90,7 +90,6 @@ Developer experience first:
 - 📁 File-based routing with Expo Router
 - 📏 Linter with [ESLint](https://eslint.org)
 - 💖 Code Formatter with [Prettier](https://prettier.io)
-- 🦊 Husky for Git Hooks
 - 🚫 Lint-staged for running linters on Git staged files
 - 🦺 Unit Testing with Jest and React Testing Library
 - 🧪 E2E Testing with Detox

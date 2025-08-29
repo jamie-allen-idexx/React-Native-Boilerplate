@@ -1,4 +1,5 @@
 import { Stack } from 'expo-router';
+import { Alert, Button, View } from 'react-native';
 
 import { Welcome } from '@/templates/Welcome';
 
@@ -6,10 +7,20 @@ const Home = () => (
   <>
     <Stack.Screen
       options={{
-        title: 'My home',
+        title: 'Hackathon',
       }}
     />
-    <Welcome />
+    <View className="flex-1">
+      <Welcome />
+      <View className="p-4">
+        <Button
+          title="Click Me!"
+          onPress={() =>
+            Alert.alert('Button Pressed', 'Hello from the button!')
+          }
+        />
+      </View>
+    </View>
   </>
 );
 
