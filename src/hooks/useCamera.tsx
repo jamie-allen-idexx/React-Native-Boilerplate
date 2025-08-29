@@ -1,5 +1,6 @@
+import type { CameraType } from 'expo-camera';
+import { Camera } from 'expo-camera';
 import { useCallback, useEffect, useState } from 'react';
-import { Camera, CameraType } from 'expo-camera';
 
 export const useCamera = () => {
   const [hasPermission, setHasPermission] = useState(false);
@@ -35,7 +36,10 @@ export const useCamera = () => {
     }
   }, []);
 
-  return { hasPermission, requestPermission, availableTypes, refreshAvailability };
+  return {
+    hasPermission,
+    requestPermission,
+    availableTypes,
+    refreshAvailability,
+  };
 };
-
-

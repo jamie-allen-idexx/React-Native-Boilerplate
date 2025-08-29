@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 
 type ChatInputProps = {
@@ -17,7 +17,7 @@ const ChatInput = ({ onSend }: ChatInputProps) => {
 
   return (
     <View className="flex-row items-center gap-2">
-      <View className="flex-1 bg-gray-100 rounded-xl px-3 py-2 border border-black/5">
+      <View className="flex-1 rounded-xl border border-black/5 bg-gray-100 px-3 py-2">
         <TextInput
           value={text}
           onChangeText={setText}
@@ -29,14 +29,12 @@ const ChatInput = ({ onSend }: ChatInputProps) => {
       <Pressable
         accessibilityRole="button"
         onPress={handleSend}
-        className="bg-blue-600 px-4 py-3 rounded-xl"
+        className="rounded-xl bg-blue-600 px-4 py-3"
       >
-        <Text className="text-white font-semibold">Send</Text>
+        <Text className="font-semibold text-white">Send</Text>
       </Pressable>
     </View>
   );
 };
 
 export { ChatInput };
-
-

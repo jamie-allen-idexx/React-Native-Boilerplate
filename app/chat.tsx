@@ -1,11 +1,12 @@
-import React, { useCallback, useRef } from 'react';
-import { FlatList, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { Stack } from 'expo-router';
+import { useCallback, useRef } from 'react';
+import { FlatList, KeyboardAvoidingView, Platform, View } from 'react-native';
 
+import { CameraButton } from '@/components/CameraButton';
 import { ChatInput } from '@/components/ChatInput';
 import { ChatMessage } from '@/components/ChatMessage';
-import { CameraButton } from '@/components/CameraButton';
-import { Message, useChat } from '@/hooks/useChat';
+import type { Message } from '@/hooks/useChat';
+import { useChat } from '@/hooks/useChat';
 
 const ChatScreen = () => {
   const { messages, sendMessage } = useChat();
@@ -59,5 +60,3 @@ const ChatScreen = () => {
 };
 
 export default ChatScreen;
-
-

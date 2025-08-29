@@ -30,5 +30,3 @@ const respond = async (userInput: string): Promise<string> => {
 };
 
 export const aiAgent = { getInitialPleasantry, respond };
-
-

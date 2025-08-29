@@ -1,15 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Modal, Pressable, Text, View, Platform } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
+import { useEffect, useRef, useState } from 'react';
+import { Modal, Platform, Pressable, Text, View } from 'react-native';
 
 import { useCamera } from '@/hooks/useCamera';
 
 const CameraButton = () => {
-  const { hasPermission, requestPermission, availableTypes, refreshAvailability } = useCamera();
+  const {
+    hasPermission,
+    requestPermission,
+    availableTypes,
+    refreshAvailability,
+  } = useCamera();
   const [isOpen, setIsOpen] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [cameraError, setCameraError] = useState<string | null>(null);
-  const [selectedRatio, setSelectedRatio] = useState<string | undefined>(undefined);
+  const [selectedRatio, setSelectedRatio] = useState<string | undefined>(
+    undefined,
+  );
   const cameraRef = useRef<Camera | null>(null);
 
   useEffect(() => {
@@ -33,7 +40,7 @@ const CameraButton = () => {
           hasPermission ? 'bg-emerald-600' : 'bg-gray-400'
         }`}
       >
-        <Text className="text-white font-semibold">
+        <Text className="font-semibold text-white">
           {hasPermission ? 'Open Camera' : 'Camera Permission Required'}
         </Text>
       </Pressable>
@@ -45,9 +52,15 @@ const CameraButton = () => {
       >
         <View className="flex-1 bg-black">
           <Camera
-            ref={(r) => (cameraRef.current = r)}
+            ref={(r) => {
+              cameraRef.current = r;
+            }}
             style={{ flex: 1 }}
-            type={availableTypes.includes(CameraType.back) ? CameraType.back : CameraType.front}
+            type={
+              availableTypes.includes(CameraType.back)
+                ? CameraType.back
+                : CameraType.front
+            }
             {...(Platform.OS === 'android' && selectedRatio
               ? { ratio: selectedRatio }
               : {})}
@@ -56,8 +69,10 @@ const CameraButton = () => {
               try {
                 // On Android, pick a supported ratio if available
                 if (Platform.OS === 'android' && cameraRef.current) {
-                  const ratios = await cameraRef.current.getSupportedRatiosAsync();
-                  const preferred = ratios?.find((r) => r === '16:9') ?? ratios?.[0];
+                  const ratios =
+                    await cameraRef.current.getSupportedRatiosAsync();
+                  const preferred =
+                    ratios?.find((r) => r === '16:9') ?? ratios?.[0];
                   setSelectedRatio(preferred);
                 }
                 await cameraRef.current?.resumePreview();
@@ -67,7 +82,9 @@ const CameraButton = () => {
                 setIsReady(true);
               }
             }}
-            onMountError={(e) => setCameraError(e?.message ?? 'Unknown camera error')}
+            onMountError={(e) =>
+              setCameraError(e?.message ?? 'Unknown camera error')
+            }
           />
           {!isReady && !cameraError ? (
             <View className="absolute inset-0 items-center justify-center">
@@ -76,16 +93,16 @@ const CameraButton = () => {
           ) : null}
           {cameraError ? (
             <View className="absolute inset-0 items-center justify-center bg-black/60 px-6">
-              <Text className="text-red-400 text-center">{cameraError}</Text>
+              <Text className="text-center text-red-400">{cameraError}</Text>
             </View>
           ) : null}
-          <View className="absolute bottom-8 left-0 right-0 items-center">
+          <View className="absolute inset-x-0 bottom-8 items-center">
             <Pressable
               accessibilityRole="button"
               onPress={() => setIsOpen(false)}
-              className="bg-white/90 px-6 py-3 rounded-full"
+              className="rounded-full bg-white/90 px-6 py-3"
             >
-              <Text className="text-black font-semibold">Close Camera</Text>
+              <Text className="font-semibold text-black">Close Camera</Text>
             </Pressable>
           </View>
         </View>
@@ -95,5 +112,3 @@ const CameraButton = () => {
 };
 
 export { CameraButton };
-
-
