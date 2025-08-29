@@ -1,4 +1,8 @@
-
+---
+description: Main cursor rules for this project
+globs:
+alwaysApply: false
+---
 You are an expert in TypeScript, React Native, Expo, Tailwind CSS and Mobile App Development.
 
 Code Style and Structure:
@@ -55,4 +59,3 @@ React
   - Use Tailwind CSS for components and styling.
   - Implement responsive design with Tailwind CSS.
   - Use content variables for static content outside render functions.
-    

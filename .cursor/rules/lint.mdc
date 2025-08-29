@@ -1,6 +1,6 @@
 ---
-description: "Main cursor rules for the visit Go linter project"
-globs: *.go
+description: Main linter rules for this project
+globs:
 alwaysApply: false
 ---
 # Comprehensive Code Quality Policy for visit
@@ -19,9 +19,9 @@ alwaysApply: false
 
 This project uses three essential quality gates:
 
-- **`make lint`** - Runs custom visit linter via `./vetsoft-go-style-golangci run -c .golangci.yml` (depends on `vet` target)
-- **`make test`** - Runs all tests with `go test -v ./...`
-- **`make build`** - Builds the binary to `bin/visit` to verify compilation
+- **`npm run lint`** - Runs custom visit linter
+- **`npm run test`** - Runs all tests
+- **`npm run check-types`** - Builds to verify compilation
 
 **Your responsibilities as an AI agent**:
 
@@ -103,7 +103,7 @@ npm run lint && npm run test && npm run check-types
 
 1. **Read each error message carefully** - Understand what rule/test/build step is failing
 2. **Identify the specific code pattern** causing the violation
-3. **Apply the correct fix** based on Go best practices and project conventions
+3. **Apply the correct fix** based on React-native best practices and project conventions
 4. **Verify the fix resolves the issue** by running the appropriate make command
 5. **Ensure no new issues were introduced** by running all three quality checks
 
