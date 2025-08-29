@@ -20,7 +20,7 @@
     "e2e:ios": "run-s e2e:ios:*",
     "e2e:android:build": "detox build --configuration android.release",
     "e2e:android:test": "detox test --configuration android.release",
-    "e2e:android": "run-s e2e:android:*",
+    "e2e:android": "run-s e2e:android:*"
   },
   "dependencies": {
     "expo": "^49.0.5",
